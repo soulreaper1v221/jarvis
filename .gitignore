@@ -1,0 +1,18 @@
+__pycache__/
+*.pyc
+*.pyo
+.pytest_cache/
+.DS_Store
+
+# PyInstaller / cx_Freeze build output
+build/
+dist/
+dist_exe/
+jarvis.spec
+jarvis-portable.tar.gz
+jarvis-portable.zip
+*.egg-info/
+
+# Allow the pre-built Windows zip to be committed (downloaded by users
+# who can't build locally)
+!jarvis-windows.zip
