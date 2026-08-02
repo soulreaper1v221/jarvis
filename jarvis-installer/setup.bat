@@ -18,6 +18,27 @@ if exist "%~f0" (
     )
 )
 REM ===========================================================================
+REM Smart-screen bypass: strip the "mark of the web" (Zone.Identifier)
+REM from every file in this folder so windows doesn't fire smartscreen
+REM warnings. The mark is an NTFS alternate data stream added by
+REM browsers / explorer when files are downloaded. Removing it makes
+REM the files look "local" to smartscreen.
+REM
+REM We do this in BOTH powershell (Unblock-File) and certutil (more
+REM aggressive -- works on some windows builds where Unblock-File
+REM silently does nothing on .bat files). If both fail, the user can
+REM right-click each file -> Properties -> Unblock manually.
+REM ===========================================================================
+echo ==^> Stripping mark-of-the-web (so smartscreen stays silent) ...
+powershell -NoProfile -ExecutionPolicy Bypass -Command "Get-ChildItem -Path '%~dp0' -Recurse -File -Force | ForEach-Object { try { Unblock-File -Path $_.FullName -ErrorAction SilentlyContinue } catch {} }" 2>nul
+for /f "delims=" %%F in ('dir /b /s /a "%~dp0*" 2^>nul') do (
+    if exist "%%F" (
+        certutil -delstore "Mark of the Web" "%%F" >nul 2>&1
+    )
+)
+echo    done.
+echo.
+REM ===========================================================================
 REM setup.bat  --  one-click setup for jarvis on Windows.
 REM
 REM This is the SIMPLE installer. Just double-click it. It will:

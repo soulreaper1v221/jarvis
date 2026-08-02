@@ -25,9 +25,12 @@ OUT  = os.path.join(ROOT, "jarvis-installer.zip")
 
 # (arcname, source-on-disk) pairs
 FILES = [
+    ("run.cmd",              os.path.join(HERE, "run.cmd")),
+    ("install.ps1",          os.path.join(HERE, "install.ps1")),
     ("setup.bat",            os.path.join(HERE, "setup.bat")),
     ("jarvis.py",            os.path.join(ROOT, "jarvis", "jarvis.py")),
     ("README_FIRST.txt",     os.path.join(HERE, "README_FIRST.txt")),
+    ("build-installer.py",   os.path.join(HERE, "build-installer.py")),
 ]
 DOCS_SRC = os.path.join(ROOT, "DOCS_SRC")   # the docs we bundle
 DOCS = [
