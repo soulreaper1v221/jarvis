@@ -19,6 +19,10 @@ REM "setup.bat" or "install.bat" -- those names are flagged more
 REM often because they match known installer patterns.
 REM ===========================================================================
 setlocal
+REM Force cwd to the script's own folder. cmd.exe can inherit a
+REM cwd of C:\Windows\System32 when you double-click a .cmd/.bat
+REM from explorer; cd /d fixes that.
+cd /d "%~dp0"
 set "SCRIPT_DIR=%~dp0"
 set "PS1=%SCRIPT_DIR%install.ps1"
 

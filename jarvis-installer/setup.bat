@@ -63,6 +63,12 @@ REM ===========================================================================
 
 setlocal EnableExtensions EnableDelayedExpansion
 
+REM Force the working directory to the script's own folder. This
+REM is important because when you double-click a .bat from
+REM explorer, cmd.exe can inherit a cwd of C:\Windows\System32
+REM or wherever, which breaks any "look in the current dir" logic.
+cd /d "%~dp0"
+
 set "SCRIPT_DIR=%~dp0"
 set "JARVIS_PY=%SCRIPT_DIR%jarvis.py"
 
@@ -89,13 +95,28 @@ if not exist "%JARVIS_PY%" (
     echo.
     echo   ERROR: jarvis.py is not next to setup.bat.
     echo.
+    echo   I am looking here: %SCRIPT_DIR%
+    echo   Looking for:     %JARVIS_PY%
+    echo.
+    echo   Files I can see in that folder:
+    dir /b "%SCRIPT_DIR%" 2>nul
+    echo.
     echo   This folder should contain:
     echo     setup.bat      (this file)
-    echo     jarvis.py      (the program)
+    echo     jarvis.py      (the program, ~530KB)
     echo     docs\          (optional reading)
+    echo     install.ps1    (smartscreen-safe launcher)
+    echo     run.cmd        (the friendly entry point)
     echo.
     echo   Did you extract the full zip? Re-download jarvis-installer.zip
     echo   and use "Extract All..." (right-click the zip).
+    echo.
+    echo   If you can see jarvis.py in the same folder as setup.bat but
+    echo   this error still fires, the smartscreen stripper may have
+    echo   moved the working directory. Try this:
+    echo     1. open a cmd window
+    echo     2. cd into the folder where setup.bat lives
+    echo     3. run:  setup.bat
     echo.
     pause
     exit /b 1

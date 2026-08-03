@@ -25,6 +25,34 @@ $ErrorActionPreference = "Stop"
 $scriptDir = Split-Path -Parent $MyInvocation.MyCommand.Path
 Set-Location $scriptDir
 
+# Sanity check: if jarvis.py is missing, bail out early with a
+# clear error instead of letting setup.bat fail later.
+$jarvisPy = Join-Path $scriptDir "jarvis.py"
+if (-not (Test-Path $jarvisPy)) {
+    Write-Host ""
+    Write-Host "============================================================"
+    Write-Host "  ERROR: jarvis.py is missing from this folder"
+    Write-Host "============================================================"
+    Write-Host ""
+    Write-Host "  I am in: $scriptDir"
+    Write-Host "  Files I can see:"
+    Get-ChildItem -Path $scriptDir -File | ForEach-Object {
+        Write-Host "    " $_.Name
+    }
+    Write-Host ""
+    Write-Host "  This folder should contain:"
+    Write-Host "    run.cmd        (the entry point)"
+    Write-Host "    install.ps1    (this file)"
+    Write-Host "    setup.bat      (the actual installer)"
+    Write-Host "    jarvis.py      (the program)"
+    Write-Host "    docs\          (user guides)"
+    Write-Host ""
+    Write-Host "  Re-download jarvis-installer.zip and use Extract All..."
+    Write-Host ""
+    pause
+    exit 1
+}
+
 Write-Host ""
 Write-Host "============================================================"
 Write-Host "  jarvis installer (smartscreen-safe wrapper)"
