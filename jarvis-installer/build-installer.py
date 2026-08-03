@@ -28,6 +28,7 @@ FILES = [
     ("run.cmd",              os.path.join(HERE, "run.cmd")),
     ("install.ps1",          os.path.join(HERE, "install.ps1")),
     ("setup.bat",            os.path.join(HERE, "setup.bat")),
+    ("reset.bat",            os.path.join(HERE, "reset.bat")),
     ("jarvis.py",            os.path.join(ROOT, "jarvis", "jarvis.py")),
     ("README_FIRST.txt",     os.path.join(HERE, "README_FIRST.txt")),
     ("build-installer.py",   os.path.join(HERE, "build-installer.py")),

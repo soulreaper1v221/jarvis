@@ -1,4 +1,4 @@
-jarvis v1.0.3 -- windows installer
+jarvis v1.0.5 -- windows installer
 ====================================
 
 this is the only folder you need.
@@ -19,6 +19,18 @@ this is the only folder you need.
 
   3. done. jarvis is running.
 
+to uninstall + reinstall (nuke and pave):
+  double-click reset.bat
+    - it asks "type YES to continue"
+    - it kills any running jarvis, deletes the installer folder,
+      your user data (~/.jarvis/), the embeddable python, and the
+      old exe install (if any)
+    - then it re-downloads the latest jarvis-installer.zip from
+      github and runs the installer
+    - WARNING: this wipes your api key, passcode override, projects,
+      deep-research sessions, and paired phones. full clean slate.
+      if you want to keep anything, copy ~/.jarvis/ somewhere first.
+
 folder contents:
   run.cmd            THE one to double-click (recommended)
   install.ps1        powershell wrapper that strips the "downloaded
@@ -26,10 +38,12 @@ folder contents:
                      doesn't fire
   setup.bat          the bare installer (run this directly if the
                      above two don't work; may show smartscreen)
+  reset.bat          uninstall + reinstall (use this if jarvis is
+                     broken and you want a clean slate)
   jarvis.py          the program (~530KB, single file, no build)
   docs\              user guides -- open any .md in notepad to read
 
-why the three-file setup?  smartscreen flags .bat files downloaded
+why the multi-file setup?  smartscreen flags .bat files downloaded
 from the internet with a scary "windows protected your pc" prompt.
 the .ps1 wrapper gets around that by stripping the "mark of the web"
 (mark of the web = the NTFS alternate data stream that windows
